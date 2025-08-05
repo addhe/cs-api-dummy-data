@@ -6,7 +6,7 @@ from unittest.mock import patch, MagicMock
 class NasabahApiTestCase(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
-        self.api_key = os.environ.get("API_KEY", "REMOVED_API_KEY")
+        self.api_key = os.environ.get("API_KEY")
 
 
     @patch("main.supabase")
