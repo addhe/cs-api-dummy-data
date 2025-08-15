@@ -1,7 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*.pyc
 *$py.class
 
 # C extensions
@@ -37,8 +36,6 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *.cover
-<<<<<<< HEAD
-*.py.cover
 .hypothesis/
 .pytest_cache/
 cover/
@@ -73,8 +70,6 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-
-<<<<<<< HEAD
 # IPython
 profile_default/
 ipython_config.py
@@ -165,7 +160,6 @@ Pipfile.lock
 # mypy
 .mypy_cache/
 .dmypy.json
-<<<<<<< HEAD
 dmypy.json
 
 # Pyre type checker
@@ -221,4 +215,3 @@ __marimo__/
 
 # Mac
 .DS_Store
->>>>>>> e48fde4 (feat: update API, dummy data, saldo field, and deployment pipeline)
