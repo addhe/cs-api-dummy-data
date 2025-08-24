@@ -31,9 +31,17 @@ Dokumen ini menyusun strategi pengujian untuk memastikan kualitas dan stabilitas
 | 7  | Request dengan parameter tidak valid           | Kirim GET /nasabah?id=abc dengan API key/JWT valid                          | id=abc                  | 400 Bad Request                       |
 | 8  | Endpoint tidak ditemukan                      | Kirim GET /nasabahs dengan API key/JWT valid                                | -                       | 404 Not Found                         |
 | 9  | Performance test                              | Kirim GET /nasabah dengan data sample >1000 rows                            | -                       | Response < 2 detik                    |
-
+| 10 | Aktivasi nasabah (autentikasi valid)           | Kirim PUT /nasabah/1/status dengan API key valid dan body { "status": "aktif" } | status=aktif          | 200 OK, status terupdate              |
+| 11 | Deaktivasi nasabah (autentikasi valid)         | Kirim PUT /nasabah/1/status dengan API key valid dan body { "status": "nonaktif" } | status=nonaktif      | 200 OK, status terupdate              |
+| 12 | Aktivasi dengan status tidak valid             | Kirim PUT /nasabah/1/status dengan status "invalid"                          | status=invalid          | 400 Bad Request                       |
+| 13 | Get statistik permainan                        | Kirim GET /stats dengan API key valid                                       | -                       | 200 OK, total_hadiah dan total_peserta_aktif sesuai |
+| 14 | Pengiriman email valid (dalam batas)           | Kirim POST /email dengan template_id valid dan within rate limit            | to=player@example.com, template_id=game_notification | 202 Accepted          |
+| 15 | Pengiriman email melebihi batas                | Kirim POST /email lebih dari 5 kali dalam sehari                            | -                       | 429 Too Many Requests                 |
+| 16 | Pengiriman email dengan template tidak valid   | Kirim POST /email dengan template_id tidak terdaftar                        | template_id=invalid     | 400 Bad Request                       |
+| 17 | Prize pool accumulation on deactivation        | 1. Deactivate participant with known balance<br>2. Get stats                | balance=117304500       | total_hadiah increases by participant's balance |
 ### 6. Test Data
-- Data sample nasabah di Supabase (minimal 5 record, variasi id, nama, status).
+- Data sample nasabah di Supabase (minimal 5 record, variasi id, nama, status, balance).
+- Pastikan beberapa record memiliki status 'aktif' dan 'nonaktif' untuk pengujian statistik.
 
 ### 7. Test Environment
 - API berjalan di lingkungan development/POC.
